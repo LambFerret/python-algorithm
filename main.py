@@ -8,13 +8,16 @@ n, m, k, arr = 0, 0, 0, []
 
 
 def answer(x, y, input_list):
-    ans = []
-    for i in range(x):
-        process = sum(list(map(int, list(str(i)))))
-        # print(x,i, process, i+process,  x == i+process)
-        if x == i+process:
-            return i
-    return 0
+    ans_array = []
+    for i in range(len(input_list)):
+        count = 0
+        for j in range(len(input_list)):
+            if input_list[i][0]<input_list[j][0] and input_list[i][1]<input_list[j][1]:
+                count+=1
+        ans_array.append(count+1)
+
+    return ans_array
+    return (x,y,input_list)
 
     # print(x, y, input_list)
 
@@ -30,7 +33,7 @@ n = int(sys.stdin.readline())
 """List Input"""
 # string을 n줄 받는 경우
 for _ in range(n):
-    arr.append(sys.stdin.readline().split())
+    arr.append(list(map(int,(sys.stdin.readline().split()))))
 
 
 # int를 한줄에 받은 경우
@@ -42,5 +45,6 @@ for _ in range(n):
 
 
 a = answer(n, m, arr)
-print(a)
+for i in a:
+    print(i)
 
