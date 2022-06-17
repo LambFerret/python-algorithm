@@ -1,7 +1,6 @@
 import sys
 
 # init
-
 n, m, k, arr = 0, 0, 0, []
 
 
@@ -9,16 +8,27 @@ n, m, k, arr = 0, 0, 0, []
 
 
 def answer(x, y, input_list):
-    print("*"*x)
+    ans_array = []
+    for i in range(len(input_list)):
+        for j in range(i+1, len(input_list)):
+            for l in range(j+1, len(input_list)):
+                ans_array.append(input_list[i]+input_list[j]+input_list[l])
+
+    result = 0
+    for i in sorted(ans_array):
+        # print(result, ans_array[i])
+        if i <= y:
+            result = i
+    print(result)
 
 
 """N, M Input"""
 # 숫자 n을 받은 경우
-n = int(sys.stdin.readline())
+# n = int(sys.stdin.readline())
 # m = int(sys.stdin.readline())
 
 # 숫자 n, m을 받은 경우
-# n, m = map(int, sys.stdin.readline().split())
+n, m = map(int, sys.stdin.readline().split())
 
 """List Input"""
 # string을 n줄 받는 경우
@@ -27,13 +37,12 @@ n = int(sys.stdin.readline())
 
 
 # int를 한줄에 받은 경우
-# arr = list(map(int,sys.stdin.readline().split()))
+arr = list(map(int,sys.stdin.readline().split()))
 
 # int를 n줄 받은 경우
 # for _ in range(n):
 #     arr.append(int(sys.stdin.readline().replace('\n', '')))
 
 
-result = answer(n, m, arr)
+answer(n, m, arr)
 
-# print(result)
