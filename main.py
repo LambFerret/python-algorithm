@@ -10,11 +10,11 @@ n, m, k, arr = 0, 0, 0, []
 
 
 def answer(x, y, input_list):
-    ls = sorted(list(str(x)), reverse=True)
-    str1 = ''
-    for i in ls:
-        str1 += i
-    return str1
+    input_list.sort()
+
+    for i in input_list:
+        print(i[0],i[1])
+
     return (x, y, input_list)
 
 
@@ -28,8 +28,8 @@ n = int(sys.stdin.readline())
 
 """List Input"""
 # string을 n줄 받는 경우
-# for _ in range(n):
-#     arr.append(sys.stdin.readline().replace('\n', ''))
+for _ in range(n):
+    arr.append(tuple(map(int,sys.stdin.readline().replace('\n', '').split())))
 
 # int를 한줄에 받은 경우
 # arr = list(map(int,sys.stdin.readline().split()))
@@ -38,4 +38,5 @@ n = int(sys.stdin.readline())
 # for _ in range(n):
 #     arr.append(int(sys.stdin.readline().replace('\n', '')))
 
-print(answer(n, m, arr))
+answer(n,m,arr)
+# print(answer(n, m, arr))
