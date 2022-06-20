@@ -10,22 +10,11 @@ n, m, k, arr = 0, 0, 0, []
 
 
 def answer(x, y, input_list):
-    input_list.sort()
-    print(round(sum(input_list) / len(input_list)))
-    print(input_list[math.floor(len(input_list) / 2)])
-    c = Counter(input_list).most_common()
-    if len(c) > 1:
-        for i in range(len(c)):
-            if c[i][1] == c[i + 1][1]:
-                print(c[i + 1][0])
-                break
-            else:
-                print(c[i][0])
-                break
-    else:
-        print(arr[0])
-
-    return max(input_list) - min(input_list)
+    ls = sorted(list(str(x)), reverse=True)
+    str1 = ''
+    for i in ls:
+        str1 += i
+    return str1
     return (x, y, input_list)
 
 
@@ -46,7 +35,7 @@ n = int(sys.stdin.readline())
 # arr = list(map(int,sys.stdin.readline().split()))
 
 # int를 n줄 받은 경우
-for _ in range(n):
-    arr.append(int(sys.stdin.readline().replace('\n', '')))
+# for _ in range(n):
+#     arr.append(int(sys.stdin.readline().replace('\n', '')))
 
 print(answer(n, m, arr))
