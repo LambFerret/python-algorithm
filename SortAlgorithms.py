@@ -11,7 +11,7 @@ class SortAlgorithms:
         print(ls)
         for i in range(len(ls)):
             min_selected = i
-            for j in range(i + 1, len(ls), -1):
+            for j in range(i + 1, len(ls)):
                 count += 1
                 print('what you looking at? ', ls[min_selected], ls[j])
                 print('min is ? ', min_selected)
@@ -112,7 +112,7 @@ class SortAlgorithms:
         def partition(left, right):
             print('-=-=-=-=-start=-=-=-=-=-=')
             pivot = (left + right) // 2
-            while True:
+            while left <= right:
                 print('피벗 :', pivot, ',피벗 인덱스 :', ls[pivot])
                 print('최소 :', left, ', 최대 :', right)
                 print('최소인덱스 :', ls[left], ', 최대인덱스 :', ls[right])
@@ -151,15 +151,32 @@ class SortAlgorithms:
             for i in range(len(ls)):
                 heapify(ls, i, len(ls))
             print(ls)
-            for i in range(len(ls)-1, 0 , -1):
+            for i in range(len(ls) - 1, 0, -1):
                 ls[0], ls[i] = ls[i], ls[0]
                 heapify(ls, 0, i)
             return ls
+
         return sort(lists)
 
+    def counting_sort(self, arr):
+        counts = [0] * (max(arr) + 1)
+        result = [0] * len(arr)
+
+        for num in arr:
+            counts[num] += 1
+        for num in range(1, len(counts)):
+            counts[num] += counts[num - 1]
+        for num in arr:
+            index = counts[num]
+            result[index - 1] = num
+            counts[num] -= 1
+        return result
+
     def examples(self):
-        ls = [9, 6, 5, 1, 4, 3, 7, 2, 8]
-        return self.heap_sort(ls)
+        ls = [3, 2, 4, 6, 12, 15, 17, 456, 5678956, 345, 232457, 285, 243, 34572, 45, 1327345, 7, 234634, 72346, 3457, ]
+        ls1 = [10, 5, 2, 3, 1, 4, 2, 3, 5, 1, 7]
+        self.counting_sort(ls1)
+        return self.quick_sort(ls)
 
 
 a = SortAlgorithms()
