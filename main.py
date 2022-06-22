@@ -9,15 +9,12 @@ n, m, k, arr = 0, 0, 0, []
 
 
 def answer(x, y, input_list):
-    input_list = list(set(input_list))
-    len_list = []
-    for i in input_list:
-        len_list.append([len(i), i])
-    len_list.sort()
-    for i in len_list:
-        print(i[1])
-    return len_list
+    sorted_list = sorted(list(set(input_list)))
+    a = {sorted_list[i]: i for i in range(len(sorted_list))}
+    result1 = [a[i] for i in input_list]
+    return result1
     return x, y, input_list
+
 
 """N, M Input"""
 # 숫자 n을 받은 경우
@@ -29,12 +26,12 @@ n = int(sys.stdin.readline())
 
 """List Input"""
 # string을 n줄 받는 경우
-for _ in range(n):
-    arr.append(sys.stdin.readline().replace('\n', ''))
+# for _ in range(n):
+#     arr.append(sys.stdin.readline().replace('\n', ''))
 
 
 # int를 한줄에 받은 경우
-# arr = list(map(int,sys.stdin.readline().split()))
+arr = list(map(int, sys.stdin.readline().split()))
 
 # int를 n줄 받은 경우
 # for _ in range(n):
@@ -43,4 +40,5 @@ for _ in range(n):
 
 result = answer(n, m, arr)
 
-# print(result)
+for a in result:
+    print(a)
