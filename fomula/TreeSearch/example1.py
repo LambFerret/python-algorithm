@@ -23,9 +23,10 @@ def ICE_bfs(graph, loc):
                 graph[i] = 1
     return 1
 
+
 count = 0
 for a in range(4):
     for b in range(5):
-        count += ICE_bfs(graph, [a,b])
+        count += ICE_bfs(graph, [a, b])
 
 print(count)

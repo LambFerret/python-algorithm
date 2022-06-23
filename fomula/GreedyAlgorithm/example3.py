@@ -1,4 +1,3 @@
-
 n, m = map(int, input().split())
 ls = []
 for a in range(n):

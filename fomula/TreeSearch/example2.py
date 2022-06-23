@@ -17,6 +17,7 @@ gone = []
 # print(gone)
 from collections import deque
 
+
 def bfs(graph, loc, visited):
     q = deque([loc])
     while q:
@@ -30,5 +31,6 @@ def bfs(graph, loc, visited):
                     return
         gone.append(v)
     print(gone)
+
 
 bfs(graph1, V, visited1)
