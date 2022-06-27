@@ -1,29 +1,17 @@
+import math
 import sys
 
 # init
 
 n, m, k, arr = 0, 0, 0, []
 
+
 # constant
-joystick = ['', (1, 0), (-1, 0), (0, -1), (0, 1)]
-
-
+PIE = math.pi
 def answer(x, y, input_list):
-    max_width = 0
-    max_height = 0
-    for i in input_list:
-        if i[0] >2 and max_width<i[1]:
-            max_width = i[1]
-        if i[0] <3 and max_height<i[1]:
-            max_height = i[1]
-    input_list = input_list+ input_list
-    small_square = 0
-    for i in range(len(input_list)):
-        if input_list[i][1] in [max_width, max_height] and input_list[i+1][1] in [max_width, max_height]:
-            small_square = input_list[i+3][1] * input_list[i+4][1]
-            break
-    return x * (max_width*max_height - small_square)
-
+    a = x**2 * PIE
+    b = x**2 * 2
+    return "{:.06f}".format(a), "{:.06f}".format(b)
     return x, y, input_list
 
 
@@ -49,8 +37,8 @@ n = int(sys.stdin.readline())
 #     arr.append(int(sys.stdin.readline().replace('\n', '')))
 
 # list<int>를 n줄 받은 경우
-for _ in range(6):
-    arr.append(list(map(int, sys.stdin.readline().split())))
+# for _ in range(n):
+#     arr.append(list(map(int,sys.stdin.readline().split())))
 
 # int를 특정 문자열 까지 받는 경우
 # while True:
@@ -60,5 +48,5 @@ for _ in range(6):
 #     arr.append(data)
 
 result = answer(n, m, arr)
-
-print(result)
+for a in result:
+    print(a)
