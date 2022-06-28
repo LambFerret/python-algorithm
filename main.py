@@ -8,13 +8,19 @@ n, m, k, arr = 0, 0, 0, []
 # constant
 
 def answer(x, y, input_list):
-    i = []
     for a in input_list:
-        if a==0:
-            i.pop(-1)
+        ans= 0
+        for b in a:
+            if b=='(':
+                ans+=1
+            else:
+                ans-=1
+            if ans<0:
+                break
+        if ans != 0:
+            print('NO')
         else:
-            i.append(a)
-    return sum(i)
+            print('YES')
     return x, y, input_list
 
 
@@ -28,16 +34,16 @@ n = int(sys.stdin.readline())
 
 """List Input"""
 # string을 n줄 받는 경우
-# for _ in range(n):
-#     arr.append(sys.stdin.readline().replace('\n', ''))
+for _ in range(n):
+    arr.append(sys.stdin.readline().replace('\n', ''))
 
 
 # int를 한줄에 받은 경우
 # arr = list(map(int,sys.stdin.readline().split()))
 
 # int를 n줄 받은 경우
-for _ in range(n):
-    arr.append(int(sys.stdin.readline().replace('\n', '')))
+# for _ in range(n):
+#     arr.append(int(sys.stdin.readline().replace('\n', '')))
 
 # list<int>를 n줄 받은 경우
 # for _ in range(n):
@@ -56,4 +62,4 @@ for _ in range(n):
 
 result = answer(n, m, arr)
 
-print(result)
+# print(result)
