@@ -12,41 +12,25 @@ class Stack:
 
     def push(self, x):
         self.stack.append(x)
-        return ('+')
 
     def pop(self):
         return self.stack.pop(-1)
 
-        # return a
+    def peek(self, x):
+        return self.stack[x]
 
 
 def answer(x, y, input_list):
-    ans = []
-    s = Stack()
-    is_correct = True
-    i = 1
-    while input_list:
-        if i <= input_list[0]:
-            ans.append(s.push(i))
-            i += 1
-            # print('아직 작음 ㄱ', input_list)
-            # print('아직 작음 ㄴ', i)
-            # print('아직 작음 ㄷ', s.stack)
-            continue
-        if i > input_list[0]:
-            # print('정답 ㄱ', input_list)
-            # print('정답 ㄴ', i)
-            # print('정답 ㄷ', s.stack)
-            spop = s.pop()
-            inputpop = input_list.pop(0)
-            if spop != inputpop:
-                is_correct = False
-            ans.append(spop)
-    if is_correct:
-        for al in ans:
-            print('+' if al == '+' else '-')
-    else:
-        print('NO')
+    ls = Stack()
+    ans = [-1] * x
+    ls.push(0)
+    for i in range(1, x):
+        while ls.stack and input_list[ls.peek(-1)] < input_list[i]:
+            ans[ls.pop()] = input_list[i]
+        ls.push(i)
+
+
+    return ans
     return x, y, input_list
 
 
@@ -65,11 +49,11 @@ n = int(sys.stdin.readline())
 
 
 # int를 한줄에 받은 경우
-# arr = list(map(int,sys.stdin.readline().split()))
+arr = list(map(int, sys.stdin.readline().split()))
 
 # int를 n줄 받은 경우
-for _ in range(n):
-    arr.append(int(sys.stdin.readline().replace('\n', '')))
+# for _ in range(n):
+#     arr.append(int(sys.stdin.readline().replace('\n', '')))
 
 # list<int>를 n줄 받은 경우
 # for _ in range(n):
@@ -94,5 +78,6 @@ for _ in range(n):
 #     arr.append(data)
 
 result = answer(n, m, arr)
-
 # print(result)
+for i in result:
+    print(i)
