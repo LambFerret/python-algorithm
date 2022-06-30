@@ -8,22 +8,23 @@ n, m, k, arr = 0, 0, 0, []
 # constant
 
 def answer(x, y, input_list):
-    q1 = deque(range(1, x + 1))
-
-    while len(q1) != 1:
-        q1.popleft()
-        q1.append(q1.popleft())
-    return q1.pop()
+    q = deque(range(1, x + 1))
+    ans = []
+    while q:
+        for _ in range(y - 1):
+            q.append(q.popleft())
+        ans.append(q.popleft())
+    return ans
     return x, y, input_list
 
 
 """N, M Input"""
 # 숫자 n을 받은 경우
-n = int(sys.stdin.readline())
+# n = int(sys.stdin.readline())
 # m = int(sys.stdin.readline())
 
 # 숫자 n, m을 받은 경우
-# n, m = map(int, sys.stdin.readline().split())
+n, m = map(int, sys.stdin.readline().split())
 
 """List Input"""
 # string을 n줄 받는 경우
@@ -61,6 +62,6 @@ n = int(sys.stdin.readline())
 #     arr.append(data)
 
 result = answer(n, m, arr)
-print(result)
+print(str(result).replace("[", "<").replace("]", ">"))
 # for i in result:
 #     print(i)
