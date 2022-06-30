@@ -1,36 +1,59 @@
 import sys
-
+from collections import deque
 # init
 
 n, m, k, arr = 0, 0, 0, []
 
 
 # constant
-class Stack:
+class Queue:
     def __init__(self):
-        self.stack = []
+        self.queue = deque()
 
     def push(self, x):
-        self.stack.append(x)
+        self.queue.append(x)
 
     def pop(self):
-        return self.stack.pop(-1)
+        if not self.queue:
+            return -1
+        else:
+            return self.queue.popleft()
 
-    def peek(self, x):
-        return self.stack[x]
+    def size(self):
+        return len(self.queue)
+
+    def empty(self):
+        return 0 if len(self.queue) != 0 else 1
+
+    def front(self):
+        if not self.queue:
+            return -1
+        else:
+            return self.queue[0]
+
+    def back(self):
+        if not self.queue:
+            return -1
+        else:
+            return self.queue[-1]
 
 
 def answer(x, y, input_list):
-    ls = Stack()
-    ans = [-1] * x
-    ls.push(0)
-    for i in range(1, x):
-        while ls.stack and input_list[ls.peek(-1)] < input_list[i]:
-            ans[ls.pop()] = input_list[i]
-        ls.push(i)
+    queue = Queue()
+    for i in input_list:
+        if i[0] == 'push':
+            queue.push(i[1])
+        elif i[0] == 'pop':
+            print(queue.pop())
+        elif i[0] == 'size':
+            print(queue.size())
+        elif i[0] == 'empty':
+            print(queue.empty())
+        elif i[0] == 'front':
+            print(queue.front())
+        elif i[0] == 'back':
+            print(queue.back())
 
-
-    return ans
     return x, y, input_list
 
 
@@ -49,7 +72,7 @@ n = int(sys.stdin.readline())
 
 
 # int를 한줄에 받은 경우
-arr = list(map(int, sys.stdin.readline().split()))
+# arr = list(map(int, sys.stdin.readline().split()))
 
 # int를 n줄 받은 경우
 # for _ in range(n):
@@ -60,8 +83,8 @@ arr = list(map(int, sys.stdin.readline().split()))
 #     arr.append(list(map(int,sys.stdin.readline().split())))
 
 # list<str>를 n줄 받은 경우
-# for _ in range(n):
-#     arr.append(list(map(str,sys.stdin.readline().split())))
+for _ in range(n):
+    arr.append(list(map(str, sys.stdin.readline().split())))
 
 # list<int>를 특정 문자열 까지 받는 경우
 # while True:
@@ -79,5 +102,5 @@ arr = list(map(int, sys.stdin.readline().split()))
 
 result = answer(n, m, arr)
 # print(result)
-for i in result:
-    print(i)
+# for i in result:
+#     print(i)
