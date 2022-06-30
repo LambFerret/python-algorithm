@@ -1,59 +1,19 @@
 import sys
 from collections import deque
-# init
 
+# init
 n, m, k, arr = 0, 0, 0, []
 
 
 # constant
-class Queue:
-    def __init__(self):
-        self.queue = deque()
-
-    def push(self, x):
-        self.queue.append(x)
-
-    def pop(self):
-        if not self.queue:
-            return -1
-        else:
-            return self.queue.popleft()
-
-    def size(self):
-        return len(self.queue)
-
-    def empty(self):
-        return 0 if len(self.queue) != 0 else 1
-
-    def front(self):
-        if not self.queue:
-            return -1
-        else:
-            return self.queue[0]
-
-    def back(self):
-        if not self.queue:
-            return -1
-        else:
-            return self.queue[-1]
-
 
 def answer(x, y, input_list):
-    queue = Queue()
-    for i in input_list:
-        if i[0] == 'push':
-            queue.push(i[1])
-        elif i[0] == 'pop':
-            print(queue.pop())
-        elif i[0] == 'size':
-            print(queue.size())
-        elif i[0] == 'empty':
-            print(queue.empty())
-        elif i[0] == 'front':
-            print(queue.front())
-        elif i[0] == 'back':
-            print(queue.back())
+    q1 = deque(range(1, x + 1))
 
+    while len(q1) != 1:
+        q1.popleft()
+        q1.append(q1.popleft())
+    return q1.pop()
     return x, y, input_list
 
 
@@ -83,8 +43,8 @@ n = int(sys.stdin.readline())
 #     arr.append(list(map(int,sys.stdin.readline().split())))
 
 # list<str>를 n줄 받은 경우
-for _ in range(n):
-    arr.append(list(map(str, sys.stdin.readline().split())))
+# for _ in range(n):
+#     arr.append(list(map(str, sys.stdin.readline().split())))
 
 # list<int>를 특정 문자열 까지 받는 경우
 # while True:
@@ -101,6 +61,6 @@ for _ in range(n):
 #     arr.append(data)
 
 result = answer(n, m, arr)
-# print(result)
+print(result)
 # for i in result:
 #     print(i)
