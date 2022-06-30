@@ -1,38 +1,72 @@
 import sys
 from collections import deque
-
 # init
+
 n, m, k, arr = 0, 0, 0, []
 
 
 # constant
+class Queue:
+    def __init__(self):
+        self.queue = deque()
+
+    def push_front(self, x):
+        self.queue.appendleft(x)
+
+    def push_back(self, x):
+        self.queue.append(x)
+
+    def pop_front(self):
+        if not self.queue:
+            return -1
+        else:
+            return self.queue.popleft()
+
+    def pop_back(self):
+        if not self.queue:
+            return -1
+        else:
+            return self.queue.pop()
+
+    def size(self):
+        return len(self.queue)
+
+    def empty(self):
+        return 0 if len(self.queue) != 0 else 1
+
+    def front(self):
+        if not self.queue:
+            return -1
+        else:
+            return self.queue[0]
+
+    def back(self):
+        if not self.queue:
+            return -1
+        else:
+            return self.queue[-1]
+
 
 def answer(x, y, input_list):
-    ans = []
-    for i in range(x):
-        i = i * 2
-        a, b = input_list[i]
-        i_list = [0] * a
-        i_list[b] = 1
-        q = deque(input_list[i + 1])
-        qi = deque(i_list)
-        is_answer = False
-        count = 0
-        while not is_answer:
-            large = max(q)
-            loop_a = q.popleft()
-            loop_b = qi.popleft()
-            if loop_b == 1 and large == loop_a:
-                count += 1
-                is_answer = True
-            else:
-                if loop_a == large:
-                    count += 1
-                else:
-                    q.append(loop_a)
-                    qi.append(loop_b)
-        ans.append(count)
-    return ans
+    queue = Queue()
+    for i in input_list:
+        if i[0] == 'push_back':
+            queue.push_back(i[1])
+        elif i[0] == 'push_front':
+            queue.push_front (i[1])
+        elif i[0] == 'pop_front':
+            print(queue.pop_front())
+        elif i[0] == 'pop_back':
+            print(queue.pop_back())
+        elif i[0] == 'size':
+            print(queue.size())
+        elif i[0] == 'empty':
+            print(queue.empty())
+        elif i[0] == 'front':
+            print(queue.front())
+        elif i[0] == 'back':
+            print(queue.back())
+
     return x, y, input_list
 
 
@@ -58,12 +92,12 @@ n = int(sys.stdin.readline())
 #     arr.append(int(sys.stdin.readline().replace('\n', '')))
 
 # list<int>를 n줄 받은 경우
-for _ in range(2 * n):
-    arr.append(list(map(int, sys.stdin.readline().split())))
+# for _ in range(n):
+#     arr.append(list(map(int,sys.stdin.readline().split())))
 
 # list<str>를 n줄 받은 경우
-# for _ in range(n):
-#     arr.append(list(map(str, sys.stdin.readline().split())))
+for _ in range(n):
+    arr.append(list(map(str, sys.stdin.readline().split())))
 
 # list<int>를 특정 문자열 까지 받는 경우
 # while True:
@@ -81,5 +115,5 @@ for _ in range(2 * n):
 
 result = answer(n, m, arr)
 # print(result)
-for i in result:
-    print(i)
+# for i in result:
+#     print(i)
