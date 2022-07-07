@@ -2,39 +2,42 @@ import sys
 
 # init
 n, m, k, arr = 0, 0, 0, []
-strbuilder = ''
 w = 0
 b = 0
+p = 0
+
+
 # constant
 def answer(x, y, input_list):
     recursive(0, 0, x)
 
     # return x, y, input_list
-    return w, b
+    return w, b, p
+
 
 def recursive(x1, y1, length):
-    global w, b, arr, strbuilder
+    global w, b, arr, p
     unit = arr[x1][y1]
-    for i in range(x1, x1+length):
-        for j in range(y1, y1+length):
+    for i in range(x1, x1 + length):
+        for j in range(y1, y1 + length):
             if unit != arr[i][j]:
-                strbuilder += '('
-
-                recursive(x1, y1, length // 2)
-                recursive(x1, y1 + length // 2, length // 2)
-                recursive(x1 + length // 2, y1, length // 2)
-                recursive(x1 + length // 2, y1 + length // 2, length // 2)
-                strbuilder += ')'
+                recursive(x1, y1, length // 3)
+                recursive(x1, y1 + length // 3, length // 3)
+                recursive(x1, y1 + length // 3 + length // 3, length // 3)
+                recursive(x1 + length // 3, y1, length // 3)
+                recursive(x1 + length // 3, y1 + length // 3, length // 3)
+                recursive(x1 + length // 3, y1 + length // 3 + length // 3, length // 3)
+                recursive(x1 + length // 3 + length // 3, y1, length // 3)
+                recursive(x1 + length // 3 + length // 3, y1 + length // 3, length // 3)
+                recursive(x1 + length // 3 + length // 3, y1 + length // 3 + length // 3, length // 3)
 
                 return;
-    if unit == '0':
-        strbuilder += '0'
-
+    if unit == -1:
         w += 1
-    else:
-        strbuilder += '1'
-
+    elif unit == 0:
         b += 1
+    else:
+        p += 1
 
 
 """N, M Input"""
@@ -47,9 +50,8 @@ n = int(sys.stdin.readline())
 
 """List Input"""
 # string을 n줄 받는 경우
-for _ in range(n):
-    arr.append(sys.stdin.readline().replace('\n', ''))
-
+# for _ in range(n):
+#     arr.append(sys.stdin.readline().replace('\n', ''))
 
 # int를 한줄에 받은 경우
 # arr = list(map(int, sys.stdin.readline().split()))
@@ -59,8 +61,8 @@ for _ in range(n):
 #     arr.append(int(sys.stdin.readline().replace('\n', '')))
 
 # list<int>를 n줄 받은 경우
-# for _ in range(n):
-#     arr.append(list(map(int,sys.stdin.readline().split())))
+for _ in range(n):
+    arr.append(list(map(int,sys.stdin.readline().split())))
 
 # list<str>를 n줄 받은 경우
 # for _ in range(n):
@@ -82,6 +84,5 @@ for _ in range(n):
 
 result = answer(n, m, arr)
 # print(result)
-# for i in result:
-#     print(i)
-print(strbuilder)
+for i in result:
+    print(i)
