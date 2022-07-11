@@ -8,11 +8,26 @@ p = 0
 
 
 # constant
-def answer(x, y, input_list):
-    recursive(0, 0, x)
+def answer(x, y, z):
+    # recursive(0, 0, x)
+    ls = []
+    count = 0
+    # for i in range(2, 10):
+    if y == 1:
+        return x % z
+    elif y == 2:
+        return (x * x) % z
 
-    # return x, y, input_list
-    return w, b, p
+    else:
+        if y % 2:
+            return ((answer(x, y // 2, z) ** 2) * x) % z
+
+        else:
+            return (answer(x, y // 2, z) ** 2) % z
+        # print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+
+    return x, y, z
+    # return w, b, p
 
 
 def recursive(x1, y1, length):
@@ -31,7 +46,7 @@ def recursive(x1, y1, length):
                 recursive(x1 + length // 3 + length // 3, y1 + length // 3, length // 3)
                 recursive(x1 + length // 3 + length // 3, y1 + length // 3 + length // 3, length // 3)
 
-                return;
+                return
     if unit == -1:
         w += 1
     elif unit == 0:
@@ -42,11 +57,11 @@ def recursive(x1, y1, length):
 
 """N, M Input"""
 # 숫자 n을 받은 경우
-n = int(sys.stdin.readline())
+# n = int(sys.stdin.readline())
 # m = int(sys.stdin.readline())
 
 # 숫자 n, m을 받은 경우
-# n, m = map(int, sys.stdin.readline().split())
+n, m, k = map(int, sys.stdin.readline().split())
 
 """List Input"""
 # string을 n줄 받는 경우
@@ -61,8 +76,8 @@ n = int(sys.stdin.readline())
 #     arr.append(int(sys.stdin.readline().replace('\n', '')))
 
 # list<int>를 n줄 받은 경우
-for _ in range(n):
-    arr.append(list(map(int,sys.stdin.readline().split())))
+# for _ in range(n):
+#     arr.append(list(map(int,sys.stdin.readline().split())))
 
 # list<str>를 n줄 받은 경우
 # for _ in range(n):
@@ -82,7 +97,7 @@ for _ in range(n):
 #         break
 #     arr.append(data)
 
-result = answer(n, m, arr)
-# print(result)
-for i in result:
-    print(i)
+result = answer(n, m, k)
+print(result)
+# for i in result:
+#     print(i)
